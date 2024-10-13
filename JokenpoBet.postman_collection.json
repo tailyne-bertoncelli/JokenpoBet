@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "573d5d51-6b7c-42cb-8d67-b5392d7bd9ab",
+		"name": "JokenpoBet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34829680"
+	},
+	"item": [
+		{
+			"name": "Usuários",
+			"item": [
+				{
+					"name": "Criar usuário",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Tailyne\",\r\n    \"email\": \"tailyne@gmail.com\",\r\n    \"senha\": \"12345678\",\r\n    \"tipoUsuario\": \"PLAYER\",\r\n    \"saldoInicial\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5039/api/User",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5039",
+							"path": [
+								"api",
+								"User"
+							]
+						},
+						"description": "Faz o cadastro do usuário na API.\n\nO campo tipoUsuario deve ser\n\n- \"ADMIN\" - Para os administradores da plataforma\n    \n- \"PLAYER\" - Para os jogadores da plataforma"
+					},
+					"response": []
+				},
+				{
+					"name": "Busca todos os usuários",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7040/api/User/allUsers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7040",
+							"path": [
+								"api",
+								"User",
+								"allUsers"
+							]
+						},
+						"description": "Busca todos os usuários. Este endpoint é permitido somente para os administradores da plataforma."
+					},
+					"response": []
+				},
+				{
+					"name": "Altera senha",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tailyne@gmail.com\",\r\n    \"senhaAtual\": \"12345678\",\r\n    \"novaSenha\": \"87654321\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7040/api/User/updatePassword",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7040",
+							"path": [
+								"api",
+								"User",
+								"updatePassword"
+							]
+						},
+						"description": "Esse endpoitn altera a senha do usuario."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Gera token de login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tailyne@gmail.com\",\r\n    \"senha\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7040/api/Login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7040",
+							"path": [
+								"api",
+								"Login"
+							]
+						},
+						"description": "Esse endpoint gera o token para a autenticação."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Criar transação",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"valor\": 5,\r\n    \"palpite\": \"PAPEL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7040/api/Transaction",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7040",
+							"path": [
+								"api",
+								"Transaction"
+							]
+						},
+						"description": "Esse endpoint faz uma aposta na plataforma\n\n**Pre-requisitos**\n\n- Aposta minima é R$1,00\n    \n- Possuir saldo em carteira, sulficiente para realizar a aposta\n    \n- Escolher um palpite valido para a aposta\n    \n    - PEDRA\n        \n    - PEPEL\n        \n    - TESOURA"
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar aposta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7040/api/Transaction/canceled/156",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7040",
+							"path": [
+								"api",
+								"Transaction",
+								"canceled",
+								"156"
+							]
+						},
+						"description": "Esse endpoint faz o cancelamento da transação. Este endpoint é permitido somente para os administradores da plataforma.\n\n**Pre-requisitos**\n\n- Adicionar o id na url do endpoint {id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Lista transações",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pagina\": 1,\r\n    \"registrosPorPagina\": 10,\r\n    \"tipo\": \"APOSTA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7040/api/Transaction/allTransactions",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7040",
+							"path": [
+								"api",
+								"Transaction",
+								"allTransactions"
+							]
+						},
+						"description": "Esse endpoint lista todos as transações"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
